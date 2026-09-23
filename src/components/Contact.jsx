@@ -59,7 +59,7 @@ export default function Contact() {
         <div className="grid-contact">
 
           {/* Form */}
-          <form onSubmit={onSubmit} className="card" style={{ padding: '40px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          <form onSubmit={onSubmit} className="card card-pad" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             {[
               { name: 'name',  label: 'Nombre', type: 'text',  placeholder: 'Tu nombre completo' },
               { name: 'email', label: 'Email',  type: 'email', placeholder: 'tu@empresa.com'     },

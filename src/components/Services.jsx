@@ -1,5 +1,6 @@
 import React from 'react';
 import { Cloud, GitBranch, Box, Activity, ShieldCheck, Layers, Code2, ArrowUpRight } from 'lucide-react';
+import { useReveal, useStaggerReveal } from '../hooks/useReveal';
 
 const featured = {
   title: 'Desarrollo de Software Empresarial e Integraciones',
@@ -18,21 +19,21 @@ const services = [
 ];
 
 const tagStyle = {
-  fontSize: '11px',
-  fontWeight: 500,
-  letterSpacing: '0.05em',
-  color: '#bbc7c6',
-  backgroundColor: 'rgba(255,255,255,0.06)',
-  borderRadius: '6px',
-  padding: '3px 9px',
+  fontSize: '11px', fontWeight: 500, letterSpacing: '0.05em',
+  color: '#bbc7c6', backgroundColor: 'rgba(255,255,255,0.06)',
+  borderRadius: '6px', padding: '3px 9px',
 };
 
 export default function Services() {
+  const headerRef  = useReveal();
+  const featRef    = useReveal();
+  const gridRef    = useStaggerReveal(80);
+
   return (
     <section id="servicios" className="section-pad" style={{ backgroundColor: '#012624' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
 
-        <div style={{ marginBottom: '48px' }}>
+        <div ref={headerRef} className="fade-up" style={{ marginBottom: '48px' }}>
           <div className="eyebrow" style={{ marginBottom: '16px' }}>Servicios</div>
           <h2 style={{ fontSize: 'clamp(1.9rem, 3.8vw, 2.75rem)', fontWeight: 500, color: '#ffffff', lineHeight: 1.1, letterSpacing: '-0.025em', margin: 0, maxWidth: '580px' }}>
             Software que funciona,<br />infraestructura que escala
@@ -40,7 +41,7 @@ export default function Services() {
         </div>
 
         {/* Featured card */}
-        <div className="card card-featured" style={{ padding: '36px', marginBottom: '12px' }}>
+        <div ref={featRef} className="card card-featured fade-up" style={{ padding: '36px', marginBottom: '12px' }}>
           <div style={{ flex: 1 }}>
             <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '16px', marginBottom: '16px' }}>
               <h3 style={{ fontSize: 'clamp(1.15rem, 2.5vw, 1.5rem)', fontWeight: 500, color: '#ffffff', lineHeight: 1.2, letterSpacing: '-0.02em', margin: 0 }}>
@@ -58,9 +59,9 @@ export default function Services() {
         </div>
 
         {/* Grid */}
-        <div className="grid-auto">
+        <div ref={gridRef} className="grid-auto">
           {services.map(({ Icon, title, description, tags }) => (
-            <div key={title} className="card" style={{ padding: '32px', display: 'flex', flexDirection: 'column' }}>
+            <div key={title} className="card fade-up" style={{ padding: '32px', display: 'flex', flexDirection: 'column' }}>
               <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '20px' }}>
                 <Icon size={18} style={{ color: '#edfffe', opacity: 0.65 }} />
                 <a href="#contacto" className="arrow-btn"><ArrowUpRight size={13} /></a>

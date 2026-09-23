@@ -1,5 +1,6 @@
 import React from 'react';
 import { Zap, Settings2, MapPin } from 'lucide-react';
+import { useReveal, useStaggerReveal } from '../hooks/useReveal';
 
 const stats = [
   { value: '100%', label: 'Cloud Native'       },
@@ -26,11 +27,15 @@ const items = [
 ];
 
 export default function WhyUs() {
+  const headerRef = useReveal();
+  const statsRef  = useStaggerReveal(100);
+  const itemsRef  = useStaggerReveal(110);
+
   return (
     <section id="por-que" className="section-pad" style={{ backgroundColor: '#011d1c' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
 
-        <div style={{ marginBottom: '48px' }}>
+        <div ref={headerRef} className="fade-up" style={{ marginBottom: '48px' }}>
           <div className="eyebrow" style={{ marginBottom: '16px' }}>¿Por qué nosotros?</div>
           <h2 style={{ fontSize: 'clamp(1.9rem, 3.8vw, 2.75rem)', fontWeight: 500, color: '#ffffff', lineHeight: 1.1, letterSpacing: '-0.025em', margin: 0 }}>
             Lo que nos hace diferentes
@@ -38,9 +43,9 @@ export default function WhyUs() {
         </div>
 
         {/* Stats */}
-        <div className="grid-stats" style={{ marginBottom: '12px' }}>
+        <div ref={statsRef} className="grid-stats" style={{ marginBottom: '12px' }}>
           {stats.map(s => (
-            <div key={s.label} className="card" style={{ padding: '28px 24px' }}>
+            <div key={s.label} className="card fade-up" style={{ padding: '28px 24px' }}>
               <div style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 500, lineHeight: 1, letterSpacing: '-0.035em', color: '#fde9ff', marginBottom: '10px' }}>
                 {s.value}
               </div>
@@ -50,9 +55,9 @@ export default function WhyUs() {
         </div>
 
         {/* Items */}
-        <div className="grid-auto">
+        <div ref={itemsRef} className="grid-auto">
           {items.map(({ Icon, title, description }) => (
-            <div key={title} className="card" style={{ padding: '32px' }}>
+            <div key={title} className="card fade-up" style={{ padding: '32px' }}>
               <Icon size={18} style={{ color: '#edfffe', opacity: 0.55, marginBottom: '20px', display: 'block' }} />
               <h3 style={{ fontSize: '18px', fontWeight: 500, color: '#ffffff', lineHeight: 1.2, letterSpacing: '-0.01em', margin: '0 0 12px' }}>
                 {title}

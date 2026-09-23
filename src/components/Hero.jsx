@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
+import CapibaraParticles from './CapibaraParticles';
 
 export default function Hero() {
   return (
@@ -11,57 +12,42 @@ export default function Hero() {
         alignItems: 'center',
         overflow: 'hidden',
         backgroundColor: '#012624',
-        padding: '80px 24px 0',
       }}
     >
-      {/* Bioluminescent orb — teal */}
+      {/* Subtle background glow */}
       <div
         className="orb-a"
         style={{
-          position: 'absolute',
-          right: '-8%',
-          top: '5%',
-          width: 'clamp(360px, 50vw, 680px)',
-          height: 'clamp(360px, 50vw, 680px)',
+          position: 'absolute', right: '-5%', top: '15%',
+          width: 'clamp(300px, 40vw, 520px)',
+          height: 'clamp(300px, 40vw, 520px)',
           borderRadius: '50%',
-          background: 'radial-gradient(circle at 38% 38%, #00c4b8 0%, #00827c 30%, #003734 58%, transparent 78%)',
-          filter: 'blur(80px)',
-          opacity: 0.38,
-          pointerEvents: 'none',
-        }}
-      />
-      {/* Bioluminescent orb — lavender edge */}
-      <div
-        className="orb-b"
-        style={{
-          position: 'absolute',
-          right: '4%',
-          top: '18%',
-          width: 'clamp(220px, 32vw, 420px)',
-          height: 'clamp(220px, 32vw, 420px)',
-          borderRadius: '50%',
-          background: 'radial-gradient(circle at 62% 62%, #fde9ff 0%, #b06dd4 38%, transparent 72%)',
-          filter: 'blur(100px)',
-          opacity: 0.1,
+          background: 'radial-gradient(circle at 38% 38%, #00827c 0%, transparent 70%)',
+          filter: 'blur(90px)',
+          opacity: 0.22,
           pointerEvents: 'none',
         }}
       />
 
-      <div style={{ position: 'relative', zIndex: 10, maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
-        <div style={{ maxWidth: '680px' }}>
-
-          <div className="eyebrow" style={{ marginBottom: '28px' }}>
+      <div className="hero-inner">
+        {/* Text column */}
+        <div style={{ flex: '1 1 52%', minWidth: 0 }}>
+          <div
+            className="eyebrow hero-badge"
+            style={{ marginBottom: '28px' }}
+          >
             Software · Cloud · DevOps · Bolivia
           </div>
 
           <h1
+            className="hero-h1"
             style={{
-              fontSize: 'clamp(2.6rem, 5.5vw, 3.8rem)',
+              fontSize: 'clamp(2.4rem, 5vw, 3.6rem)',
               fontWeight: 500,
-              lineHeight: 1.05,
+              lineHeight: 1.06,
               letterSpacing: '-0.03em',
               color: '#ffffff',
-              margin: '0 0 24px',
+              margin: '0 0 22px',
             }}
           >
             Desarrollamos software
@@ -70,12 +56,13 @@ export default function Hero() {
           </h1>
 
           <p
+            className="hero-sub"
             style={{
               fontSize: '16px',
               lineHeight: 1.65,
               color: '#bbc7c6',
-              maxWidth: '500px',
-              margin: '0 0 40px',
+              maxWidth: '460px',
+              margin: '0 0 38px',
             }}
           >
             Creamos aplicaciones empresariales a medida e implementamos
@@ -83,7 +70,10 @@ export default function Hero() {
             Del código a producción, sin complicaciones.
           </p>
 
-          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+          <div
+            className="hero-ctas"
+            style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}
+          >
             <a href="#servicios" className="btn-aurora">
               Ver servicios <ArrowUpRight size={14} />
             </a>
@@ -92,8 +82,12 @@ export default function Hero() {
             </a>
           </div>
         </div>
-      </div>
 
+        {/* Particle capybara column — desktop only */}
+        <div className="hero-capy">
+          <CapibaraParticles />
+        </div>
+      </div>
     </section>
   );
 }
