@@ -1,53 +1,113 @@
 import React from 'react';
-import { ArrowRight, ChevronDown } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-950 px-4 pt-16">
-      <div className="absolute top-[-15%] left-[-10%] w-[50%] h-[50%] bg-teal-500/20 rounded-full blur-[120px] pointer-events-none animate-pulse-slow" />
-      <div className="absolute bottom-[-15%] right-[-10%] w-[45%] h-[45%] bg-purple-500/15 rounded-full blur-[120px] pointer-events-none animate-pulse-slow-delay" />
+    <section
+      style={{
+        position: 'relative',
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        overflow: 'hidden',
+        backgroundColor: '#012624',
+        padding: '80px 24px 0',
+      }}
+    >
+      {/* Bioluminescent orb — teal */}
+      <div
+        className="orb-a"
+        style={{
+          position: 'absolute',
+          right: '-8%',
+          top: '5%',
+          width: 'clamp(360px, 50vw, 680px)',
+          height: 'clamp(360px, 50vw, 680px)',
+          borderRadius: '50%',
+          background: 'radial-gradient(circle at 38% 38%, #00c4b8 0%, #00827c 30%, #003734 58%, transparent 78%)',
+          filter: 'blur(80px)',
+          opacity: 0.38,
+          pointerEvents: 'none',
+        }}
+      />
+      {/* Bioluminescent orb — lavender edge */}
+      <div
+        className="orb-b"
+        style={{
+          position: 'absolute',
+          right: '4%',
+          top: '18%',
+          width: 'clamp(220px, 32vw, 420px)',
+          height: 'clamp(220px, 32vw, 420px)',
+          borderRadius: '50%',
+          background: 'radial-gradient(circle at 62% 62%, #fde9ff 0%, #b06dd4 38%, transparent 72%)',
+          filter: 'blur(100px)',
+          opacity: 0.1,
+          pointerEvents: 'none',
+        }}
+      />
 
-      <div className="relative z-10 max-w-4xl mx-auto text-center">
-        <div className="inline-flex items-center gap-2 glass px-4 py-1.5 rounded-full mb-8 text-xs font-semibold text-teal-400 uppercase tracking-widest">
-          <span className="w-1.5 h-1.5 bg-teal-400 rounded-full animate-pulse" />
-          Software · Cloud · DevOps · Bolivia
-        </div>
+      <div style={{ position: 'relative', zIndex: 10, maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
+        <div style={{ maxWidth: '680px' }}>
 
-        <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold text-white leading-[1.1] tracking-tight mb-6">
-          Desarrollamos software{' '}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 to-teal-500">
-            y la nube que lo soporta
-          </span>
-        </h1>
+          <div className="eyebrow" style={{ marginBottom: '28px' }}>
+            Software · Cloud · DevOps · Bolivia
+          </div>
 
-        <p className="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-          Creamos aplicaciones empresariales a medida e implementamos la infraestructura cloud
-          que las mantiene corriendo. Del código a producción, sin complicaciones.
-        </p>
-
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href="#servicios"
-            className="inline-flex items-center justify-center gap-2 bg-teal-500 hover:bg-teal-400 text-white font-semibold px-7 py-3.5 rounded-xl transition-all duration-200 hover:shadow-xl hover:shadow-teal-500/25"
+          <h1
+            style={{
+              fontSize: 'clamp(2.6rem, 5.5vw, 3.8rem)',
+              fontWeight: 500,
+              lineHeight: 1.05,
+              letterSpacing: '-0.03em',
+              color: '#ffffff',
+              margin: '0 0 24px',
+            }}
           >
-            Ver servicios <ArrowRight size={18} />
-          </a>
-          <a
-            href="#contacto"
-            className="inline-flex items-center justify-center glass hover:bg-white/8 text-slate-200 hover:text-white font-semibold px-7 py-3.5 rounded-xl transition-all duration-200"
+            Desarrollamos software
+            <br />
+            <span style={{ color: '#edfffe' }}>y la nube que lo soporta</span>
+          </h1>
+
+          <p
+            style={{
+              fontSize: '16px',
+              lineHeight: 1.65,
+              color: '#bbc7c6',
+              maxWidth: '500px',
+              margin: '0 0 40px',
+            }}
           >
-            Contáctanos
-          </a>
+            Creamos aplicaciones empresariales a medida e implementamos
+            la infraestructura cloud que las mantiene corriendo.
+            Del código a producción, sin complicaciones.
+          </p>
+
+          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+            <a href="#servicios" className="btn-aurora">
+              Ver servicios <ArrowUpRight size={14} />
+            </a>
+            <a href="#contacto" className="btn-ghost">
+              Contáctanos
+            </a>
+          </div>
         </div>
       </div>
 
-      <a
-        href="#servicios"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-slate-600 hover:text-teal-400 transition-colors animate-float"
-        aria-label="Scroll hacia abajo"
+      {/* Scroll hint */}
+      <div
+        className="eyebrow"
+        style={{
+          position: 'absolute',
+          bottom: '32px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          fontSize: '10px',
+          letterSpacing: '0.18em',
+        }}
       >
-        <ChevronDown size={28} />
-      </a>
+        Scroll
+      </div>
     </section>
   );
 }

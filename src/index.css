@@ -1,39 +1,133 @@
 @import "tailwindcss";
 
+@theme {
+  --color-liquid-abyss:      #012624;
+  --color-liquid-deep:       #011d1c;
+  --color-liquid-kelp:       #003734;
+  --color-liquid-mist:       #edfffe;
+  --color-platinum:          #ffffff;
+  --color-silver-mist:       #bbc7c6;
+  --color-lavender-phosphor: #fde9ff;
+  --color-slate-deep:        #707777;
+
+  --font-matter: 'DM Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  --radius-sm:   6px;
+  --radius-card: 16px;
+}
+
 :root {
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'DM Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
   color-scheme: dark;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
   min-width: 320px;
-  background-color: #020617;
+  background-color: #012624;
+  color: #ffffff;
 }
 
-.glass {
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+/* ── Surfaces ────────────────────────────────────── */
+.card      { background: #003734; border-radius: 16px; }
+.card-deep { background: #011d1c; border-radius: 16px; }
+
+/* ── Section eyebrow label ───────────────────────── */
+.eyebrow {
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #bbc7c6;
 }
 
-@keyframes pulse-slow {
-  0%, 100% { opacity: 0.3; transform: scale(1); }
-  50%       { opacity: 0.65; transform: scale(1.12); }
+/* ── Nav link ────────────────────────────────────── */
+.nav-link {
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #bbc7c6;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-link:hover { color: #ffffff; }
+
+/* ── Aurora gradient CTA ─────────────────────────── */
+.btn-aurora {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 22px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: #081312;
+  background: linear-gradient(90deg,
+    rgb(203,255,252)   0%,
+    rgb(237,255,254)  26.25%,
+    rgb(255,253,250)  47.57%,
+    rgb(250,209,255)  88.96%
+  );
+  transition: opacity 0.2s;
+}
+.btn-aurora:hover    { opacity: 0.88; }
+.btn-aurora:disabled { opacity: 0.55; cursor: not-allowed; }
+
+/* ── Ghost button ────────────────────────────────── */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 22px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.1);
+  cursor: pointer;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: #bbc7c6;
+  background: transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+.btn-ghost:hover { color: #ffffff; border-color: rgba(255,255,255,0.22); }
+
+/* ── Arrow icon button (32×32) ───────────────────── */
+.arrow-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  background: rgba(3,81,75,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+.arrow-btn:hover { background: rgba(3,81,75,0.85); }
+
+/* ── Bioluminescent orb animations ───────────────── */
+@keyframes orb-float {
+  0%, 100% { transform: translateY(0)    scale(1);    }
+  50%       { transform: translateY(-28px) scale(1.06); }
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-10px); }
-}
-
-.animate-pulse-slow        { animation: pulse-slow 8s ease-in-out infinite; }
-.animate-pulse-slow-delay  { animation: pulse-slow 8s ease-in-out infinite 2s; }
-.animate-float             { animation: float 5s ease-in-out infinite; }
+.orb-a { animation: orb-float 13s ease-in-out infinite; }
+.orb-b { animation: orb-float 17s ease-in-out infinite reverse; }

@@ -1,78 +1,78 @@
 import React from 'react';
+import { ArrowUpRight } from 'lucide-react';
 import { FaGithub, FaLinkedinIn, FaXTwitter, FaInstagram } from 'react-icons/fa6';
 
 const navLinks = [
-  { label: 'Servicios',          href: '#servicios' },
-  { label: '¿Por qué nosotros?', href: '#por-que' },
-  { label: 'Stack',              href: '#stack' },
-  { label: 'Contacto',           href: '#contacto' },
+  { label: 'Servicios',  href: '#servicios' },
+  { label: 'Nosotros',   href: '#por-que'   },
+  { label: 'Stack',      href: '#stack'     },
+  { label: 'Contacto',   href: '#contacto'  },
 ];
 
-// TODO: reemplaza los href '#' con tus URLs reales cuando tengas las cuentas
+// TODO: reemplaza '#' con las URLs reales cuando tengas las cuentas
 const socials = [
-  { Icon: FaGithub,     href: '#', label: 'GitHub' },
-  { Icon: FaLinkedinIn, href: '#', label: 'LinkedIn' },
-  { Icon: FaXTwitter,   href: '#', label: 'Twitter / X' },
-  { Icon: FaInstagram,  href: '#', label: 'Instagram' },
+  { Icon: FaGithub,     href: '#', label: 'GitHub'      },
+  { Icon: FaLinkedinIn, href: '#', label: 'LinkedIn'     },
+  { Icon: FaXTwitter,   href: '#', label: 'Twitter / X'  },
+  { Icon: FaInstagram,  href: '#', label: 'Instagram'    },
 ];
 
 export default function Footer() {
   return (
-    <footer className="bg-slate-950 border-t border-white/5">
-      <div className="max-w-6xl mx-auto px-4 py-14">
-        <div className="grid sm:grid-cols-3 gap-10 mb-12">
+    <footer style={{ backgroundColor: '#011d1c', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '80px 24px' }}>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '48px', marginBottom: '64px' }}>
+
+          {/* Brand */}
           <div>
-            <div className="flex items-center gap-2.5 mb-4">
-              <img src="/favicon.ico" alt="Capibara Digital" className="w-7 h-7" />
-              <span className="font-bold text-white tracking-tight">
-                <span className="text-teal-400">Capibara</span> Digital
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
+              <img src="/favicon.ico" alt="Capibara Digital" style={{ width: '26px', height: '26px' }} />
+              <span style={{ fontWeight: 500, fontSize: '15px', color: '#ffffff', letterSpacing: '-0.01em' }}>
+                Capibara Digital
               </span>
             </div>
-            <p className="text-slate-500 text-sm leading-relaxed">
+            <p style={{ fontSize: '13px', color: '#bbc7c6', lineHeight: 1.65, margin: 0 }}>
               Software & IT en la nube. Construimos infraestructura que escala y equipos que entregan.
             </p>
           </div>
 
+          {/* Nav */}
           <div>
-            <h4 className="text-slate-400 font-semibold text-xs uppercase tracking-widest mb-4">
+            <div className="eyebrow" style={{ fontSize: '10px', letterSpacing: '0.15em', marginBottom: '20px' }}>
               Navegación
-            </h4>
-            <ul className="space-y-2">
+            </div>
+            <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '12px' }}>
               {navLinks.map(l => (
                 <li key={l.href}>
-                  <a
-                    href={l.href}
-                    className="text-slate-500 hover:text-teal-400 transition-colors text-sm"
-                  >
-                    {l.label}
-                  </a>
+                  <a href={l.href} className="nav-link" style={{ fontSize: '12px' }}>{l.label}</a>
                 </li>
               ))}
             </ul>
           </div>
 
+          {/* Social */}
           <div>
-            <h4 className="text-slate-400 font-semibold text-xs uppercase tracking-widest mb-4">
+            <div className="eyebrow" style={{ fontSize: '10px', letterSpacing: '0.15em', marginBottom: '20px' }}>
               Redes sociales
-            </h4>
-            <div className="flex gap-2.5">
+            </div>
+            <div style={{ display: 'flex', gap: '8px' }}>
               {socials.map(({ Icon, href, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  className="w-9 h-9 glass rounded-xl flex items-center justify-center text-slate-500 hover:text-teal-400 hover:border-teal-500/30 transition-all"
-                >
-                  <Icon size={15} />
+                <a key={label} href={href} aria-label={label} className="arrow-btn">
+                  <Icon size={13} />
                 </a>
               ))}
             </div>
           </div>
         </div>
 
-        <div className="border-t border-white/5 pt-6 flex flex-col sm:flex-row justify-between items-center gap-2 text-slate-600 text-xs">
-          <span>© {new Date().getFullYear()} Capibara Digital. Todos los derechos reservados.</span>
-          <span>Hecho en Bolivia 🇧🇴</span>
+        <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
+          <span className="eyebrow" style={{ fontSize: '11px' }}>
+            © {new Date().getFullYear()} Capibara Digital. Todos los derechos reservados.
+          </span>
+          <span className="eyebrow" style={{ fontSize: '11px' }}>
+            Hecho en Bolivia 🇧🇴
+          </span>
         </div>
       </div>
     </footer>

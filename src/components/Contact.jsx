@@ -1,168 +1,164 @@
 import React, { useState } from 'react';
-import { Send, MessageCircle, Mail, MapPin } from 'lucide-react';
+import { ArrowUpRight, MessageCircle, Mail, MapPin } from 'lucide-react';
 
 const WA_NUMBER = '59171254296';
 const WA_MSG    = encodeURIComponent('Hola, me interesa conocer más sobre los servicios de Capibara Digital.');
 const EMAIL     = 'info@capibaradigital.com';
 
+const inputBase = {
+  width: '100%',
+  boxSizing: 'border-box',
+  backgroundColor: '#011d1c',
+  border: '1px solid rgba(255,255,255,0.08)',
+  borderRadius: '6px',
+  padding: '12px 14px',
+  color: '#ffffff',
+  fontSize: '14px',
+  fontFamily: 'inherit',
+  outline: 'none',
+};
+
 export default function Contact() {
   const [form, setForm]   = useState({ name: '', email: '', message: '' });
-  const [status, setStatus] = useState('idle'); // idle | sending | done
+  const [status, setStatus] = useState('idle');
 
   function onChange(e) {
     setForm(f => ({ ...f, [e.target.name]: e.target.value }));
   }
 
+  function onFocus(e)  { e.target.style.borderColor = 'rgba(0,196,184,0.4)'; }
+  function onBlur(e)   { e.target.style.borderColor = 'rgba(255,255,255,0.08)'; }
+
   function onSubmit(e) {
     e.preventDefault();
     setStatus('sending');
     const subject = encodeURIComponent(`Contacto desde Capibara Digital — ${form.name}`);
-    const body    = encodeURIComponent(
-      `Nombre: ${form.name}\nEmail: ${form.email}\n\nMensaje:\n${form.message}`
-    );
+    const body    = encodeURIComponent(`Nombre: ${form.name}\nEmail: ${form.email}\n\nMensaje:\n${form.message}`);
     window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
     setTimeout(() => {
       setStatus('done');
       setForm({ name: '', email: '', message: '' });
       setTimeout(() => setStatus('idle'), 4000);
-    }, 500);
+    }, 600);
   }
 
   return (
-    <section
-      id="contacto"
-      className="py-24 px-4 relative"
-      style={{ background: 'linear-gradient(180deg,#020617 0%,#0f172a 100%)' }}
-    >
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[50%] h-[50%] bg-purple-500/8 rounded-full blur-[120px] pointer-events-none" />
+    <section id="contacto" style={{ backgroundColor: '#011d1c', padding: '120px 24px' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
 
-      <div className="max-w-6xl mx-auto relative z-10">
-        <div className="text-center mb-16">
-          <span className="text-teal-400 text-xs font-bold uppercase tracking-widest">Contacto</span>
-          <h2 className="text-3xl md:text-5xl font-bold text-white mt-3 tracking-tight">
+        <div style={{ marginBottom: '56px' }}>
+          <div className="eyebrow" style={{ marginBottom: '16px' }}>Contacto</div>
+          <h2 style={{ fontSize: 'clamp(1.9rem, 3.8vw, 2.75rem)', fontWeight: 500, color: '#ffffff', lineHeight: 1.1, letterSpacing: '-0.025em', margin: '0 0 16px' }}>
             Hablemos de tu proyecto
           </h2>
-          <p className="text-slate-400 mt-4 max-w-xl mx-auto leading-relaxed">
-            ¿Listo para llevar tu infraestructura al siguiente nivel?
-            Escríbenos y te respondemos en menos de 24 horas.
+          <p style={{ fontSize: '15px', color: '#bbc7c6', lineHeight: 1.65, margin: 0, maxWidth: '460px' }}>
+            ¿Listo para llevar tu infraestructura al siguiente nivel? Escríbenos y respondemos en menos de 24 horas.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto items-start">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '12px', alignItems: 'start' }}>
+
           {/* Form */}
-          <form onSubmit={onSubmit} className="glass rounded-2xl p-8 space-y-5">
+          <form onSubmit={onSubmit} className="card" style={{ padding: '40px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            {[
+              { name: 'name',  label: 'Nombre', type: 'text',  placeholder: 'Tu nombre completo' },
+              { name: 'email', label: 'Email',  type: 'email', placeholder: 'tu@empresa.com'     },
+            ].map(f => (
+              <div key={f.name}>
+                <label style={{ display: 'block', fontSize: '10px', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.15em', color: '#bbc7c6', marginBottom: '8px' }}>
+                  {f.label}
+                </label>
+                <input
+                  type={f.type} name={f.name} required
+                  value={form[f.name]} onChange={onChange}
+                  placeholder={f.placeholder}
+                  style={inputBase} onFocus={onFocus} onBlur={onBlur}
+                />
+              </div>
+            ))}
             <div>
-              <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-1.5">
-                Nombre
-              </label>
-              <input
-                type="text"
-                name="name"
-                required
-                value={form.name}
-                onChange={onChange}
-                placeholder="Tu nombre completo"
-                className="w-full bg-slate-800/60 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-teal-500 transition-colors"
-              />
-            </div>
-            <div>
-              <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-1.5">
-                Email
-              </label>
-              <input
-                type="email"
-                name="email"
-                required
-                value={form.email}
-                onChange={onChange}
-                placeholder="tu@empresa.com"
-                className="w-full bg-slate-800/60 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-teal-500 transition-colors"
-              />
-            </div>
-            <div>
-              <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wide mb-1.5">
+              <label style={{ display: 'block', fontSize: '10px', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.15em', color: '#bbc7c6', marginBottom: '8px' }}>
                 Mensaje
               </label>
               <textarea
-                name="message"
-                required
-                rows={5}
-                value={form.message}
-                onChange={onChange}
-                placeholder="Cuéntanos sobre tu proyecto o necesidad..."
-                className="w-full bg-slate-800/60 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-teal-500 transition-colors resize-none"
+                name="message" required rows={5}
+                value={form.message} onChange={onChange}
+                placeholder="Cuéntanos sobre tu proyecto..."
+                style={{ ...inputBase, resize: 'none' }}
+                onFocus={onFocus} onBlur={onBlur}
               />
             </div>
             <button
               type="submit"
               disabled={status !== 'idle'}
-              className="w-full inline-flex items-center justify-center gap-2 bg-teal-500 hover:bg-teal-400 disabled:opacity-60 text-white font-semibold py-3 rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-teal-500/25"
+              className="btn-aurora"
+              style={{ justifyContent: 'center' }}
             >
-              {status === 'done'
-                ? '¡Mensaje enviado!'
-                : status === 'sending'
-                ? 'Abriendo correo...'
-                : 'Enviar mensaje'}
-              <Send size={16} />
+              {status === 'done' ? '¡Enviado!' : status === 'sending' ? 'Enviando...' : 'Enviar mensaje'}
+              <ArrowUpRight size={14} />
             </button>
           </form>
 
-          {/* Info */}
-          <div className="space-y-5">
-            <h3 className="text-white font-semibold text-lg">Otras formas de contactarnos</h3>
+          {/* Info cards */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            {[
+              {
+                href: `https://wa.me/${WA_NUMBER}?text=${WA_MSG}`,
+                Icon: MessageCircle,
+                iconBg: 'rgba(0,160,80,0.18)',
+                iconColor: '#4ade80',
+                title: 'WhatsApp',
+                sub: 'Respuesta rápida',
+                external: true,
+              },
+              {
+                href: `mailto:${EMAIL}`,
+                Icon: Mail,
+                iconBg: 'rgba(3,81,75,0.5)',
+                iconColor: '#edfffe',
+                title: 'Email',
+                sub: EMAIL,
+              },
+            ].map(({ href, Icon, iconBg, iconColor, title, sub, external }) => (
+              <a
+                key={title}
+                href={href}
+                target={external ? '_blank' : undefined}
+                rel={external ? 'noopener noreferrer' : undefined}
+                className="card"
+                style={{ padding: '24px 28px', display: 'flex', alignItems: 'center', gap: '16px', textDecoration: 'none', transition: 'opacity 0.2s' }}
+                onMouseEnter={e => e.currentTarget.style.opacity = '0.78'}
+                onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+              >
+                <div className="arrow-btn" style={{ width: '40px', height: '40px', background: iconBg }}>
+                  <Icon size={16} style={{ color: iconColor }} />
+                </div>
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontSize: '14px', fontWeight: 500, color: '#ffffff', marginBottom: '2px' }}>{title}</div>
+                  <div className="eyebrow" style={{ fontSize: '10px' }}>{sub}</div>
+                </div>
+                <ArrowUpRight size={14} style={{ color: '#bbc7c6' }} />
+              </a>
+            ))}
 
-            <a
-              href={`https://wa.me/${WA_NUMBER}?text=${WA_MSG}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-4 glass rounded-xl p-4 hover:border-green-500/30 group transition-all"
-            >
-              <div className="w-10 h-10 bg-green-500/10 rounded-xl flex items-center justify-center group-hover:bg-green-500/20 transition-colors shrink-0">
-                <MessageCircle size={19} className="text-green-400" />
+            <div className="card" style={{ padding: '24px 28px', display: 'flex', alignItems: 'center', gap: '16px' }}>
+              <div className="arrow-btn" style={{ width: '40px', height: '40px', background: 'rgba(150,100,220,0.18)' }}>
+                <MapPin size={16} style={{ color: '#fde9ff' }} />
               </div>
               <div>
-                <div className="text-white font-medium text-sm">WhatsApp</div>
-                <div className="text-slate-500 text-xs">Respuesta rápida · haz clic para chatear</div>
-              </div>
-            </a>
-
-            <a
-              href={`mailto:${EMAIL}`}
-              className="flex items-center gap-4 glass rounded-xl p-4 hover:border-teal-500/30 group transition-all"
-            >
-              <div className="w-10 h-10 bg-teal-500/10 rounded-xl flex items-center justify-center group-hover:bg-teal-500/20 transition-colors shrink-0">
-                <Mail size={19} className="text-teal-400" />
-              </div>
-              <div>
-                <div className="text-white font-medium text-sm">Email</div>
-                <div className="text-slate-500 text-xs">{EMAIL}</div>
-              </div>
-            </a>
-
-            <div className="flex items-center gap-4 glass rounded-xl p-4">
-              <div className="w-10 h-10 bg-purple-500/10 rounded-xl flex items-center justify-center shrink-0">
-                <MapPin size={19} className="text-purple-400" />
-              </div>
-              <div>
-                <div className="text-white font-medium text-sm">Ubicación</div>
-                <div className="text-slate-500 text-xs">La Paz, Bolivia</div>
+                <div style={{ fontSize: '14px', fontWeight: 500, color: '#ffffff', marginBottom: '2px' }}>Ubicación</div>
+                <div className="eyebrow" style={{ fontSize: '10px' }}>La Paz, Bolivia</div>
               </div>
             </div>
 
-            <div className="glass rounded-xl p-5">
-              <h4 className="text-white font-semibold text-sm mb-3">Horario de atención</h4>
-              <div className="space-y-1.5 text-sm">
-                {[
-                  ['Lunes — Viernes', '8:00 — 18:00'],
-                  ['Sábado',          '9:00 — 13:00'],
-                  ['Domingo',         'Cerrado'],
-                ].map(([day, hours]) => (
-                  <div key={day} className="flex justify-between">
-                    <span className="text-slate-500">{day}</span>
-                    <span className="text-slate-300">{hours}</span>
-                  </div>
-                ))}
-              </div>
+            <div className="card" style={{ padding: '28px' }}>
+              <div className="eyebrow" style={{ fontSize: '10px', letterSpacing: '0.15em', marginBottom: '16px' }}>Horario de atención</div>
+              {[['Lunes — Viernes', '8:00 — 18:00'], ['Sábado', '9:00 — 13:00'], ['Domingo', 'Cerrado']].map(([day, hours]) => (
+                <div key={day} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14px', marginBottom: '10px' }}>
+                  <span style={{ color: '#bbc7c6' }}>{day}</span>
+                  <span style={{ color: '#edfffe', fontWeight: 500 }}>{hours}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>

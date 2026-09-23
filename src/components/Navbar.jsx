@@ -2,80 +2,68 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 
 const links = [
-  { label: 'Servicios',       href: '#servicios' },
-  { label: '¿Por qué nosotros?', href: '#por-que' },
-  { label: 'Stack',           href: '#stack' },
-  { label: 'Contacto',        href: '#contacto' },
+  { label: 'Servicios', href: '#servicios' },
+  { label: 'Nosotros',  href: '#por-que'  },
+  { label: 'Stack',     href: '#stack'    },
+  { label: 'Contacto',  href: '#contacto' },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen]         = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
+    const fn = () => setScrolled(window.scrollY > 24);
+    window.addEventListener('scroll', fn);
+    return () => window.removeEventListener('scroll', fn);
   }, []);
 
+  const barStyle = {
+    position: 'fixed', top: 0, width: '100%', zIndex: 50,
+    transition: 'background 0.3s, border-color 0.3s',
+    backgroundColor: scrolled ? '#012624' : 'transparent',
+    borderBottom: scrolled ? '1px solid rgba(255,255,255,0.06)' : '1px solid transparent',
+  };
+
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'glass shadow-lg shadow-black/30' : ''}`}>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-        <a href="#" className="flex items-center gap-2.5">
-          <img src="/favicon.ico" alt="Capibara Digital" className="w-8 h-8" />
-          <span className="font-bold text-white text-lg tracking-tight">
-            <span className="text-teal-400">Capibara</span> Digital
+    <nav style={barStyle}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px', height: '72px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+
+        <a href="#" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
+          <img src="/favicon.ico" alt="Capibara Digital" style={{ width: '28px', height: '28px' }} />
+          <span style={{ fontWeight: 500, fontSize: '15px', color: '#ffffff', letterSpacing: '-0.01em' }}>
+            Capibara Digital
           </span>
         </a>
 
-        <div className="hidden md:flex items-center gap-7">
+        {/* Desktop */}
+        <div className="hidden md:flex" style={{ alignItems: 'center', gap: '32px' }}>
           {links.map(l => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="text-slate-400 hover:text-teal-400 transition-colors text-sm font-medium"
-            >
-              {l.label}
-            </a>
+            <a key={l.href} href={l.href} className="nav-link">{l.label}</a>
           ))}
-          <a
-            href="#contacto"
-            className="bg-teal-500 hover:bg-teal-400 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors"
-          >
-            Contactar
-          </a>
+        </div>
+        <div className="hidden md:flex">
+          <a href="#contacto" className="btn-aurora">Contactar</a>
         </div>
 
+        {/* Mobile toggle */}
         <button
-          className="md:hidden text-slate-400 hover:text-white transition-colors"
+          className="md:hidden"
           onClick={() => setOpen(o => !o)}
-          aria-label="Menu"
+          style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#bbc7c6', padding: '4px' }}
         >
           {open ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
 
       {open && (
-        <div className="md:hidden glass border-t border-white/5">
-          <div className="px-4 py-5 flex flex-col gap-4">
-            {links.map(l => (
-              <a
-                key={l.href}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="text-slate-300 hover:text-teal-400 transition-colors text-sm"
-              >
-                {l.label}
-              </a>
-            ))}
-            <a
-              href="#contacto"
-              onClick={() => setOpen(false)}
-              className="bg-teal-500 hover:bg-teal-400 text-white text-sm font-semibold px-4 py-2.5 rounded-lg transition-colors text-center"
-            >
-              Contactar
-            </a>
-          </div>
+        <div style={{ backgroundColor: '#012624', borderTop: '1px solid rgba(255,255,255,0.06)', padding: '20px 24px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          {links.map(l => (
+            <a key={l.href} href={l.href} className="nav-link" onClick={() => setOpen(false)}>{l.label}</a>
+          ))}
+          <a href="#contacto" className="btn-aurora" style={{ justifyContent: 'center' }} onClick={() => setOpen(false)}>
+            Contactar
+          </a>
         </div>
       )}
     </nav>
