@@ -94,20 +94,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Scroll hint */}
-      <div
-        className="eyebrow"
-        style={{
-          position: 'absolute',
-          bottom: '32px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          fontSize: '10px',
-          letterSpacing: '0.18em',
-        }}
-      >
-        Scroll
-      </div>
     </section>
   );
 }
