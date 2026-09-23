@@ -22,7 +22,7 @@ export default function Footer() {
     <footer style={{ backgroundColor: '#011d1c', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '80px 24px' }}>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '48px', marginBottom: '64px' }}>
+        <div className="grid-footer" style={{ marginBottom: '64px' }}>
 
           {/* Brand */}
           <div>

@@ -29,10 +29,10 @@ const tagStyle = {
 
 export default function Services() {
   return (
-    <section id="servicios" style={{ backgroundColor: '#012624', padding: '120px 24px' }}>
+    <section id="servicios" className="section-pad" style={{ backgroundColor: '#012624' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
 
-        <div style={{ marginBottom: '56px' }}>
+        <div style={{ marginBottom: '48px' }}>
           <div className="eyebrow" style={{ marginBottom: '16px' }}>Servicios</div>
           <h2 style={{ fontSize: 'clamp(1.9rem, 3.8vw, 2.75rem)', fontWeight: 500, color: '#ffffff', lineHeight: 1.1, letterSpacing: '-0.025em', margin: 0, maxWidth: '580px' }}>
             Software que funciona,<br />infraestructura que escala
@@ -40,25 +40,27 @@ export default function Services() {
         </div>
 
         {/* Featured card */}
-        <div className="card" style={{ padding: '40px 44px', marginBottom: '12px' }}>
-          <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '16px', marginBottom: '16px' }}>
-            <h3 style={{ fontSize: 'clamp(1.2rem, 2.5vw, 1.55rem)', fontWeight: 500, color: '#ffffff', lineHeight: 1.2, letterSpacing: '-0.02em', margin: 0 }}>
-              {featured.title}
-            </h3>
-            <a href="#contacto" className="arrow-btn"><ArrowUpRight size={14} /></a>
-          </div>
-          <p style={{ fontSize: '15px', color: '#bbc7c6', lineHeight: 1.65, margin: '0 0 24px', maxWidth: '760px' }}>
-            {featured.description}
-          </p>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-            {featured.tags.map(t => <span key={t} style={tagStyle}>{t}</span>)}
+        <div className="card card-featured" style={{ padding: '36px', marginBottom: '12px' }}>
+          <div style={{ flex: 1 }}>
+            <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '16px', marginBottom: '16px' }}>
+              <h3 style={{ fontSize: 'clamp(1.15rem, 2.5vw, 1.5rem)', fontWeight: 500, color: '#ffffff', lineHeight: 1.2, letterSpacing: '-0.02em', margin: 0 }}>
+                {featured.title}
+              </h3>
+              <a href="#contacto" className="arrow-btn"><ArrowUpRight size={14} /></a>
+            </div>
+            <p style={{ fontSize: '15px', color: '#bbc7c6', lineHeight: 1.65, margin: '0 0 24px' }}>
+              {featured.description}
+            </p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+              {featured.tags.map(t => <span key={t} style={tagStyle}>{t}</span>)}
+            </div>
           </div>
         </div>
 
         {/* Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '12px' }}>
+        <div className="grid-auto">
           {services.map(({ Icon, title, description, tags }) => (
-            <div key={title} className="card" style={{ padding: '36px', display: 'flex', flexDirection: 'column' }}>
+            <div key={title} className="card" style={{ padding: '32px', display: 'flex', flexDirection: 'column' }}>
               <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '20px' }}>
                 <Icon size={18} style={{ color: '#edfffe', opacity: 0.65 }} />
                 <a href="#contacto" className="arrow-btn"><ArrowUpRight size={13} /></a>

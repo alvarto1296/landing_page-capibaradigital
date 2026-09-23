@@ -123,6 +123,64 @@ body {
 }
 .arrow-btn:hover { background: rgba(3,81,75,0.85); }
 
+/* ── Responsive layout helpers ───────────────────── */
+.section-pad {
+  padding: 72px 20px;
+}
+
+/* Services / TechStack / WhyUs items */
+.grid-auto {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr;
+}
+
+/* Stats row: single column on small mobile */
+.grid-stats {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr;
+}
+
+/* Contact: always stacked until wide enough */
+.grid-contact {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+
+/* Footer columns */
+.grid-footer {
+  display: grid;
+  gap: 40px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 480px) {
+  .grid-stats { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 640px) {
+  .section-pad { padding: 96px 24px; }
+  .grid-auto    { grid-template-columns: repeat(2, 1fr); }
+  .grid-footer  { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  .section-pad  { padding: 120px 24px; }
+  .grid-auto    { grid-template-columns: repeat(3, 1fr); }
+  .grid-contact { grid-template-columns: repeat(2, 1fr); }
+  .grid-footer  { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Featured card: stack on mobile, row on md+ */
+.card-featured {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
 /* ── Bioluminescent orb animations ───────────────── */
 @keyframes orb-float {
   0%, 100% { transform: translateY(0)    scale(1);    }

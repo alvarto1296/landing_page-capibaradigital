@@ -43,10 +43,10 @@ export default function Contact() {
   }
 
   return (
-    <section id="contacto" style={{ backgroundColor: '#011d1c', padding: '120px 24px' }}>
+    <section id="contacto" className="section-pad" style={{ backgroundColor: '#011d1c' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
 
-        <div style={{ marginBottom: '56px' }}>
+        <div style={{ marginBottom: '48px' }}>
           <div className="eyebrow" style={{ marginBottom: '16px' }}>Contacto</div>
           <h2 style={{ fontSize: 'clamp(1.9rem, 3.8vw, 2.75rem)', fontWeight: 500, color: '#ffffff', lineHeight: 1.1, letterSpacing: '-0.025em', margin: '0 0 16px' }}>
             Hablemos de tu proyecto
@@ -56,7 +56,7 @@ export default function Contact() {
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '12px', alignItems: 'start' }}>
+        <div className="grid-contact">
 
           {/* Form */}
           <form onSubmit={onSubmit} className="card" style={{ padding: '40px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
